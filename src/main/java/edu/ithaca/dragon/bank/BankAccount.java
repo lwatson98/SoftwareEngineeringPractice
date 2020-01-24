@@ -37,7 +37,6 @@ public class BankAccount {
 
     public static boolean isEmailValid(String email){
         String acceptableChar = "abcdefghijklmnopqrstuvwxyz_.-";
-        String[] validDomains = {".com",".org", ".cc"};
         if (email.indexOf('@') == -1){
             return false;
         }else if (!checkEmailValidChar(email, acceptableChar)) {
