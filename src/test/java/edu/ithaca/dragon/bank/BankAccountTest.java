@@ -85,5 +85,29 @@ class BankAccountTest {
         //check for exception thrown correctly
         assertThrows(IllegalArgumentException.class, ()-> new BankAccount("", 100));
     }
+    /**Takes a double and returns true if the amount is positive and has two decimal points or less, and false otherwise.
+     *
+     * */
+    @Test
+    void isAmountValidTest(){
+        /**Tests to return false if the inputted string parameter is a negative number
+         *
+         * */
+        BankAccount bankAccount2 = new BankAccount("jcole@gmail.com",-9.00);
+        assertFalse(bankAccount2.isAmountValid(-9.00));
+/**Tests to return false if the inputted string parameter is a negative number
+ *
+ * */
+        /**Tests to return false if the inputted double parameter is number more than 2 decimals
+         *
+         * */
+        assertFalse(bankAccount2.isAmountValid(9.050));
+
+/**Tests to return true if the inputted double parameter is a positive number
+ *
+ * */
+        assertTrue(bankAccount2.isAmountValid(900));
+
+    }
 
 }

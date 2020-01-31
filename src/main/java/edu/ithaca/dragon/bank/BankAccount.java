@@ -151,4 +151,16 @@ public class BankAccount {
 
     }
 
+    public static boolean isAmountValid(double checkamount){
+        String strAmount = "" + checkamount;
+        if((strAmount.substring(strAmount.indexOf(".")+1).length())>2){
+            return false;
+
+        }
+            return true;
+    }
+
+    public void deposit(){}
+    public void transfer(){}
+
 }
