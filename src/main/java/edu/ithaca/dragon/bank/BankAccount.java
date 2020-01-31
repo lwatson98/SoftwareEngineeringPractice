@@ -55,10 +55,14 @@ public class BankAccount {
         }
         else {
             if (amount >= 0) {
-                if (amount <= this.balance) {
-                    balance -= amount;
-                } else {
+                if (amount > this.balance) {
+
                     throw new InsufficientFundsException("The amount you wish to withdraw exceeds your balance :" + this.balance);
+
+                }
+                else {
+                    balance -= amount;
+
                 }
 
             }
