@@ -12,7 +12,7 @@ public class BankAccount {
         if (isEmailValid(email)){
             this.email = email;
             this.balance = startingBalance;
-            if(startingBalance<0||Balanceformatting(startingBalance)==false){
+            if(startingBalance<0||Balanceformat(startingBalance)==false){
                 throw new IllegalArgumentException("startingBalance: " + startingBalance + " is invalid, cannot create account");
 
             }
@@ -23,7 +23,7 @@ public class BankAccount {
         }
     }
 
-    public Boolean Balanceformatting(double balances){
+    public static Boolean Balanceformat(double balances){
         String format = ""+balances;
         int Decimals = format.substring(format.indexOf(".")+1).length();
         if (Decimals<3){
@@ -46,7 +46,7 @@ public class BankAccount {
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
      */
     public void withdraw (double amount) throws InsufficientFundsException {
-        if(Balanceformatting(amount)==false){
+        if(Balanceformat(amount)==false){
             throw new IllegalArgumentException("Amount: " + amount + " is invalid, cannot withdrawal .000 amounts");
 
         }
@@ -151,16 +151,30 @@ public class BankAccount {
 
     }
 
-    public static boolean isAmountValid(double checkamount){
-        String strAmount = "" + checkamount;
-        if((strAmount.substring(strAmount.indexOf(".")+1).length())>2){
+    public boolean isAmountValid(double checkamount){
+        if (checkamount<0){
+            return false;
+        }
+        if(Balanceformat(checkamount)==false){
+            return false;
+        }
+        if(checkamount>this.balance){
             return false;
 
         }
             return true;
     }
 
-    public void deposit(){}
-    public void transfer(){}
+    public void deposit(double amount, BankAccount account){
+                if(isAmountValid(amount)==true){
+                    account.balance=account.balance-amount;
+                }
+    }
+    public void transfer(double amount, BankAccount account1, BankAccount account2){
+        if(isAmountValid(amount)==true){
+            account1.balance=account1.balance-amount;
+            account2.balance=account2.balance+amount;
+        }
+    }
 
 }

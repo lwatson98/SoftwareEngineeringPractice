@@ -93,7 +93,7 @@ class BankAccountTest {
         /**Tests to return false if the inputted string parameter is a negative number
          *
          * */
-        BankAccount bankAccount2 = new BankAccount("jcole@gmail.com",-9.00);
+        BankAccount bankAccount2 = new BankAccount("lcole@gmail.com",-9.00);
         assertFalse(bankAccount2.isAmountValid(-9.00));
 /**Tests to return false if the inputted string parameter is a negative number
  *
@@ -110,4 +110,43 @@ class BankAccountTest {
 
     }
 
+    void DepositTest(){
+        BankAccount bankAccount3 = new BankAccount("jcole@gmail.com",20);
+        assertFalse(bankAccount3.deposit(-9.00,bankAccount3));
+/**Tests to return false if the inputted string parameter is a negative number
+ *
+ * */
+        /**Tests to return false if the inputted double parameter is number more than 2 decimals
+         *
+         * */
+        assertThrows(bankAccount3.deposit(9.050,bankAccount3));
+
+/**Tests to return true if the inputted double parameter is a positive number
+ *
+ * */
+        assertTrue(bankAccount3.deposit(900,bankAccount3));
+
+
+    }
+
+    void transferTest(){
+        BankAccount bankAccount4 = new BankAccount("jcole@gmail.com",14);
+        BankAccount bankAccount5 = new BankAccount("dcole@gmail.com",14);
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("acole@gmail", 100).transfer(9.050,bankAccount4, bankAccount5));
+/**Tests to return false if the inputted string parameter is a negative number
+ *
+ * */
+        /**Tests to return false if the inputted double parameter is number more than 2 decimals
+         *
+         * */
+        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("acole@gmail", 100).transfer(9.050,bankAccount4, bankAccount5));
+
+/**Tests to return true if the inputted double parameter is a positive number
+ *
+ * */
+        assertTrue(bankAccount4.transfer(900,bankAccount4, bankAccount5));
+
+
+    }
 }
+
